@@ -1,6 +1,7 @@
-<% if items.present? %>
+<h1>Haveランキング</h1>
+<% if @items.present? %>
   <div class="row">
-    <% items.each do |item| %>
+    <% @items.each_with_index do |item, index| %>
       <div class="item">
         <div class="col-md-3 col-sm-4 col-xs-12">
           <div class="panel panel-default">
@@ -8,17 +9,15 @@
               <img src="<%= item.image_url %>" alt="" >
             </div>
             <div class="panel-body">
-              <% if item.persisted? %>
-                <p class="item-title"><%= link_to item.name, item %></p>
-              <% else %>
-                <p class="item-title"><%= item.name %></p>
-              <% end %>
-              <div class="buttons text-center btn-toolbar">
+              <p class="item-title"><%= link_to item.name, item %></p>
+              <div class="buttons text-center">
                 <% if logged_in? %>
-                    <%= render 'ownerships/want_button', item: item %>
-                    <%= render 'ownerships/have_button', item: item %>
+                  <%= render 'ownerships/have_button', item: item %>
                 <% end %>
               </div>
+            </div>
+            <div class="panel-footer">
+              <p class="text-center"><%= index+1 %>位: <%= @ranking_counts[item.id] %> Haves</p>
             </div>
           </div>
         </div>
