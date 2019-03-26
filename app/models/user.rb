@@ -34,7 +34,7 @@ class User < ApplicationRecord
   end
   
   def remove_from_have item
-    have = self.haves.find(item_id: item.id)
+    have = self.haves.find_by(item_id: item.id)
     have.destroy if have
   end
 

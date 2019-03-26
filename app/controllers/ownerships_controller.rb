@@ -34,7 +34,7 @@ class OwnershipsController < ApplicationController
     end
 
     if params[:type] == 'Have'
-      current_user.remove_from_have(@item) 
+      current_user.remove_from_have(@item)
       flash[:success] = '商品の Have を解除しました。'
     end
 
