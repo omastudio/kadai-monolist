@@ -15,7 +15,14 @@
               <% end %>
               <div class="buttons text-center">
                 <% if logged_in? %>
-                  <%= render 'ownerships/want_button', item: item %>
+                <div class="btn-toolbar">
+                  <div class="btn-group">
+                    <%= render 'ownerships/want_button', item: item %>
+                  </div>
+                  <div class="btn-group">
+                    <%= render 'ownerships/have_button', item: item %>
+                  </div>
+                </div>
                 <% end %>
               </div>
             </div>

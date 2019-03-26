@@ -12,11 +12,15 @@ class User < ApplicationRecord
   has_many :wants
   has_many :want_items, through: :wants, source: :item
   
-  def want(item)
+  has_many :haves, class_name: 'Have'
+  has_many :have_items, through: :haves, source: :item
+  
+  
+  def add_to_want item
     self.wants.find_or_create_by(item_id: item.id)
   end
   
-  def unwant(item)
+  def remove_from_want item
     want = self.wants.find_by(item_id: item.id)
     want.destroy if want
   end
@@ -25,4 +29,17 @@ class User < ApplicationRecord
     self.want_items.include?(item)
   end
   
+  def add_to_have item
+    self.haves.find_or_create_by(item_id: item.id)
+  end
+  
+  def remove_from_have item
+    have = self.haves.find(item_id: item.id)
+    have.destroy if have
+  end
+
+  def have?(item)
+    self.have_items.include?(item)
+  end
+
 end
